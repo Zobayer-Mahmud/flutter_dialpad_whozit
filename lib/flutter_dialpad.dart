@@ -154,8 +154,8 @@ class DialPad extends StatefulWidget {
     this.hideDialButton = false,
     this.hideBackspaceButton = false,
     this.hideSubtitle = false,
-    this.outputMask = '(000) 000-0000',
-    this.hint = '(000) 000-0000',
+    this.outputMask = null,
+    this.hint = '000 000-0000',
     this.buttonColor = Colors.grey,
     this.buttonTextColor = Colors.black,
     this.dialButtonColor = Colors.green,
@@ -175,7 +175,7 @@ class DialPad extends StatefulWidget {
     this.backspaceButtonPadding = const EdgeInsets.all(0),
     this.dialButtonPadding = const EdgeInsets.all(0),
     this.callOnEnter = false,
-    this.copyToClipboard = true,
+    this.copyToClipboard = false,
     this.pasteFromClipboard = true,
     this.textFieldPadding = const EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 16),
     this.scalingType = ScalingType.min,
@@ -325,7 +325,7 @@ class _DialPadState extends State<DialPad> {
   Widget _defaultKeypadButtonBuilder(BuildContext context, int index, KeyValue key, KeyValue? altKey, String? hint) {
     return ActionButton(
       title: key.value,
-      subtitle: altKey?.value ?? hint,
+      subtitle: altKey?.value ?? null,
       color: widget.buttonColor,
       hideSubtitle: widget.hideSubtitle,
       onTap: () => _onKeypadPressed(key),
@@ -419,7 +419,7 @@ class _DialPadState extends State<DialPad> {
         child: PhoneTextField(
           textColor: widget.dialOutputTextColor,
           textSize: widget.dialOutputTextSize,
-          decoration: InputDecoration(border: InputBorder.none, hintText: widget.hint),
+          decoration: InputDecoration(border: InputBorder.none),
           controller: _controller,
           copyToClipboard: widget.copyToClipboard,
           readOnly: !widget.pasteFromClipboard,
